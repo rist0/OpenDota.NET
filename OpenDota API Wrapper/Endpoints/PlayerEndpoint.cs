@@ -112,6 +112,11 @@ namespace OpenDotaDotNet.Endpoints
             return 1;
         }
 
+        public int ThirdJunkMethod()
+        {
+            return 1;
+        }
+
 
 
         /// <summary>
