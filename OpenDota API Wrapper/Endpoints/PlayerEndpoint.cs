@@ -137,11 +137,9 @@ namespace OpenDotaDotNet.Endpoints
                                                              string project = null)
         {
             var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort, project);
-
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerMatches, playerId), addedArguments);
-
             response.EnsureSuccessStatusCode();
-
+            // test
             var playerMatches = JsonConvert.DeserializeObject<List<PlayerMatch>>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
 
             return playerMatches;
