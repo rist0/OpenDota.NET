@@ -107,6 +107,13 @@ namespace OpenDotaDotNet.Endpoints
             return 1;
         }
 
+        public int SecondJunkMethod()
+        {
+            return 1;
+        }
+
+
+
         /// <summary>
         /// Matches played
         /// </summary>
