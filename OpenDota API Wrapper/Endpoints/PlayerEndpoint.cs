@@ -14,6 +14,8 @@ namespace OpenDotaDotNet.Endpoints
         private const string PlayerRecentMatches = "players/{0}/recentMatches";
         private const string PlayerMatches = "players/{0}/matches";
         private const string PlayerHeroes = "players/{0}/heroes";
+        private const string PlayerPeers = "players/{0}/peers";
+        private const string PlayerPros = "players/{0}/pros";
 
         private readonly Request _request;
 
@@ -33,7 +35,7 @@ namespace OpenDotaDotNet.Endpoints
 
             response.EnsureSuccessStatusCode();
 
-            var playerInfo = JsonConvert.DeserializeObject<Player>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
+            var playerInfo = JsonConvert.DeserializeObject<Player>(await response.Content.ReadAsStringAsync());
 
             return playerInfo;
         }
@@ -80,7 +82,7 @@ namespace OpenDotaDotNet.Endpoints
 
             response.EnsureSuccessStatusCode();
 
-            var playerWinLoss = JsonConvert.DeserializeObject<PlayerWinLoss>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
+            var playerWinLoss = JsonConvert.DeserializeObject<PlayerWinLoss>(await response.Content.ReadAsStringAsync());
 
             return playerWinLoss;
         }
@@ -96,23 +98,10 @@ namespace OpenDotaDotNet.Endpoints
 
             response.EnsureSuccessStatusCode();
 
-            var playerRecentMatches = JsonConvert.DeserializeObject<List<PlayerRecentMatch>>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
+            var playerRecentMatches = JsonConvert.DeserializeObject<List<PlayerRecentMatch>>(await response.Content.ReadAsStringAsync());
 
             return playerRecentMatches;
         }
-
-
-        public int JunkMethod()
-        {
-            return 1;
-        }
-
-        public int SecondJunkMethod()
-        {
-            return 1;
-        }
-
-
 
         /// <summary>
         /// Matches played
@@ -153,11 +142,34 @@ namespace OpenDotaDotNet.Endpoints
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerMatches, playerId), addedArguments);
             response.EnsureSuccessStatusCode();
             // test
-            var playerMatches = JsonConvert.DeserializeObject<List<PlayerMatch>>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
+            var playerMatches = JsonConvert.DeserializeObject<List<PlayerMatch>>(await response.Content.ReadAsStringAsync());
 
             return playerMatches;
         }
 
+        /// <summary>
+        /// Heroes played
+        /// </summary>
+        /// <param name="playerId">Steam32 account ID</param>
+        /// <param name="limit">Number of matches to limit to</param>
+        /// <param name="offset">Number of matches to offset start by</param>
+        /// <param name="win">Whether the player won</param>
+        /// <param name="patch">Patch ID</param>
+        /// <param name="gameMode">Game Mode ID</param>
+        /// <param name="lobbyType">Lobby type ID</param>
+        /// <param name="region">Region ID</param>
+        /// <param name="date">Days previous</param>
+        /// <param name="laneRole">Lane Role ID</param>
+        /// <param name="heroId">Hero ID</param>
+        /// <param name="isRadiant">Whether the player was radiant</param>
+        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
+        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
+        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
+        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
+        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
+        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
+        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <returns></returns>
         public async Task<List<PlayerHero>> GetPlayerHeroesAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
         {
             var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
@@ -166,10 +178,84 @@ namespace OpenDotaDotNet.Endpoints
 
             response.EnsureSuccessStatusCode();
 
-            var playerHeroes = JsonConvert.DeserializeObject<List<PlayerHero>>(await response.Content.ReadAsStringAsync()/*, JsonConverters.Converter.Settings*/);
+            var playerHeroes = JsonConvert.DeserializeObject<List<PlayerHero>>(await response.Content.ReadAsStringAsync());
 
             return playerHeroes;
         }
+
+        /// <summary>
+        /// Players played with
+        /// </summary>
+        /// <param name="playerId">Steam32 account ID</param>
+        /// <param name="limit">Number of matches to limit to</param>
+        /// <param name="offset">Number of matches to offset start by</param>
+        /// <param name="win">Whether the player won</param>
+        /// <param name="patch">Patch ID</param>
+        /// <param name="gameMode">Game Mode ID</param>
+        /// <param name="lobbyType">Lobby type ID</param>
+        /// <param name="region">Region ID</param>
+        /// <param name="date">Days previous</param>
+        /// <param name="laneRole">Lane Role ID</param>
+        /// <param name="heroId">Hero ID</param>
+        /// <param name="isRadiant">Whether the player was radiant</param>
+        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
+        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
+        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
+        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
+        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
+        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
+        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <returns></returns>
+        public async Task<List<PlayerPeer>> GetPlayerPeersAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        {
+            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+
+            var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerPeers, playerId), addedArguments);
+
+            response.EnsureSuccessStatusCode();
+
+            var playerPeers = JsonConvert.DeserializeObject<List<PlayerPeer>>(await response.Content.ReadAsStringAsync());
+
+            return playerPeers;
+        }
+
+        /// <summary>
+        /// Pro players played with
+        /// </summary>
+        /// <param name="playerId">Steam32 account ID</param>
+        /// <param name="limit">Number of matches to limit to</param>
+        /// <param name="offset">Number of matches to offset start by</param>
+        /// <param name="win">Whether the player won</param>
+        /// <param name="patch">Patch ID</param>
+        /// <param name="gameMode">Game Mode ID</param>
+        /// <param name="lobbyType">Lobby type ID</param>
+        /// <param name="region">Region ID</param>
+        /// <param name="date">Days previous</param>
+        /// <param name="laneRole">Lane Role ID</param>
+        /// <param name="heroId">Hero ID</param>
+        /// <param name="isRadiant">Whether the player was radiant</param>
+        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
+        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
+        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
+        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
+        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
+        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
+        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <returns></returns>
+        public async Task<List<PlayerPro>> GetPlayerProsAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        {
+            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+
+            var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerPros, playerId), addedArguments);
+
+            response.EnsureSuccessStatusCode();
+
+            var playerPros = JsonConvert.DeserializeObject<List<PlayerPro>>(await response.Content.ReadAsStringAsync());
+
+            return playerPros;
+        }
+
+
 
         #region Helper
         private List<string> CreateArgumentListForPlayerWinLossRequest(

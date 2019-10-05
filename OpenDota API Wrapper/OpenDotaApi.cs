@@ -8,10 +8,12 @@ namespace OpenDotaDotNet
     public class OpenDotaApi : IOpenDotaApi
     {
         private static OpenDotaApi _instance;
+
         private readonly Request _request;
 
         public IMatchEndpoint Matches { get; }
         public IPlayerEndpoint Player { get; }
+        public IProPlayerEndpoint ProPlayers { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = "", WebProxy proxy = null)
         {
@@ -29,6 +31,7 @@ namespace OpenDotaDotNet
 
             Matches = new MatchEndpoint(_request);
             Player = new PlayerEndpoint(_request);
+            ProPlayers = new ProPlayerEndpoint(_request);
         }
     }
 }

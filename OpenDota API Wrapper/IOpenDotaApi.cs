@@ -7,5 +7,7 @@ namespace OpenDotaDotNet
         IMatchEndpoint Matches { get; }
 
         IPlayerEndpoint Player { get; }
+
+        IProPlayerEndpoint ProPlayers { get; }
     }
 }
