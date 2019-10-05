@@ -136,13 +136,25 @@ namespace OpenDotaDotNet.Endpoints
                                                              int? having = null, string sort = null,
                                                              string project = null)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort, project);
-            var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerMatches, playerId), addedArguments);
-            response.EnsureSuccessStatusCode();
-            // test
-            var playerMatches = JsonConvert.DeserializeObject<List<PlayerMatch>>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
 
-            return playerMatches;
+            if(playerId > 1)
+            {
+                if(lobbyType == 0)
+                {
+                    return null;
+                } else
+                {
+                    return await Task.FromResult(new List<PlayerMatch>());
+                }
+            }
+
+            //var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort, project);
+            //var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerMatches, playerId), addedArguments);
+            //response.EnsureSuccessStatusCode();
+            //// test
+            //var playerMatches = JsonConvert.DeserializeObject<List<PlayerMatch>>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
+
+            //return playerMatches;
         }
 
         public async Task<List<PlayerHero>> GetPlayerHeroesAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
