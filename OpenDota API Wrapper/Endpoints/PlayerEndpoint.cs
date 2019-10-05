@@ -20,6 +20,7 @@ namespace OpenDotaDotNet.Endpoints
         private const string PlayerCounts = "players/{0}/counts";
         private const string PlayerHistograms = "players/{0}/histograms/{1}";
         private const string PlayerWardmap = "players/{0}/wardmap";
+        private const string PlayerWordcloud = "players/{0}/wordcloud";
 
         private readonly Request _request;
 
@@ -368,6 +369,29 @@ namespace OpenDotaDotNet.Endpoints
             return playerHistograms;
         }
 
+        /// <summary>
+        /// Wards placed in matches played
+        /// </summary>
+        /// <param name="playerId">Steam32 account ID</param>
+        /// <param name="limit">Number of matches to limit to</param>
+        /// <param name="offset">Number of matches to offset start by</param>
+        /// <param name="win">Whether the player won</param>
+        /// <param name="patch">Patch ID</param>
+        /// <param name="gameMode">Game Mode ID</param>
+        /// <param name="lobbyType">Lobby type ID</param>
+        /// <param name="region">Region ID</param>
+        /// <param name="date">Days previous</param>
+        /// <param name="laneRole">Lane Role ID</param>
+        /// <param name="heroId">Hero ID</param>
+        /// <param name="isRadiant">Whether the player was radiant</param>
+        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
+        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
+        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
+        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
+        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
+        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
+        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <returns></returns>
         public async Task<PlayerWardmap> GetPlayerWardmapAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
         {
             var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
@@ -379,6 +403,42 @@ namespace OpenDotaDotNet.Endpoints
             var playerWardmap = JsonConvert.DeserializeObject<PlayerWardmap>(await response.Content.ReadAsStringAsync());
 
             return playerWardmap;
+        }
+
+        /// <summary>
+        /// Words said/read in matches played
+        /// </summary>
+        /// <param name="playerId">Steam32 account ID</param>
+        /// <param name="limit">Number of matches to limit to</param>
+        /// <param name="offset">Number of matches to offset start by</param>
+        /// <param name="win">Whether the player won</param>
+        /// <param name="patch">Patch ID</param>
+        /// <param name="gameMode">Game Mode ID</param>
+        /// <param name="lobbyType">Lobby type ID</param>
+        /// <param name="region">Region ID</param>
+        /// <param name="date">Days previous</param>
+        /// <param name="laneRole">Lane Role ID</param>
+        /// <param name="heroId">Hero ID</param>
+        /// <param name="isRadiant">Whether the player was radiant</param>
+        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
+        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
+        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
+        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
+        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
+        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
+        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <returns></returns>
+        public async Task<PlayerWordcloud> GetPlayerWordcloudAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        {
+            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+
+            var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerWordcloud, playerId), addedArguments);
+
+            response.EnsureSuccessStatusCode();
+
+            var playerWordcloud = JsonConvert.DeserializeObject<PlayerWordcloud>(await response.Content.ReadAsStringAsync());
+
+            return playerWordcloud;
         }
 
         #region Helper
