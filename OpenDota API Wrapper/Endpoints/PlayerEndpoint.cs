@@ -101,6 +101,12 @@ namespace OpenDotaDotNet.Endpoints
             return playerRecentMatches;
         }
 
+
+        public int JunkMethod()
+        {
+            return 1;
+        }
+
         /// <summary>
         /// Matches played
         /// </summary>
