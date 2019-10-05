@@ -54,5 +54,42 @@ namespace OpenDotaDotNet.Interfaces
                                                  List<int> excludedAccountIds = null, List<int> withHeroIds = null,
                                                  List<int> againstHeroIds = null, int? significant = null,
                                                  int? having = null, string sort = null);
+
+        Task<List<PlayerTotal>> GetPlayerTotalsAsync(long playerId, int? limit = null, int? offset = null,
+                                                     int? win = null, int? patch = null, int? gameMode = null,
+                                                     int? lobbyType = null, int? region = null, int? date = null,
+                                                     int? laneRole = null, int? heroId = null, int? isRadiant = null,
+                                                     List<int> includedAccountIds = null,
+                                                     List<int> excludedAccountIds = null, List<int> withHeroIds = null,
+                                                     List<int> againstHeroIds = null, int? significant = null,
+                                                     int? having = null, string sort = null);
+
+        Task<PlayerCount> GetPlayerCountsAsync(long playerId, int? limit = null, int? offset = null, int? win = null,
+                                               int? patch = null, int? gameMode = null, int? lobbyType = null,
+                                               int? region = null, int? date = null, int? laneRole = null,
+                                               int? heroId = null, int? isRadiant = null,
+                                               List<int> includedAccountIds = null, List<int> excludedAccountIds = null,
+                                               List<int> withHeroIds = null, List<int> againstHeroIds = null,
+                                               int? significant = null, int? having = null, string sort = null);
+
+        Task<List<PlayerHistogram>> GetPlayerHistogramsAsync(long playerId, string field, int? limit = null,
+                                                             int? offset = null, int? win = null, int? patch = null,
+                                                             int? gameMode = null, int? lobbyType = null,
+                                                             int? region = null, int? date = null, int? laneRole = null,
+                                                             int? heroId = null, int? isRadiant = null,
+                                                             List<int> includedAccountIds = null,
+                                                             List<int> excludedAccountIds = null,
+                                                             List<int> withHeroIds = null,
+                                                             List<int> againstHeroIds = null, int? significant = null,
+                                                             int? having = null, string sort = null);
+
+        Task<PlayerWardmap> GetPlayerWardmapAsync(long playerId, int? limit = null, int? offset = null, int? win = null,
+                                                  int? patch = null, int? gameMode = null, int? lobbyType = null,
+                                                  int? region = null, int? date = null, int? laneRole = null,
+                                                  int? heroId = null, int? isRadiant = null,
+                                                  List<int> includedAccountIds = null,
+                                                  List<int> excludedAccountIds = null, List<int> withHeroIds = null,
+                                                  List<int> againstHeroIds = null, int? significant = null,
+                                                  int? having = null, string sort = null);
     }
 }
