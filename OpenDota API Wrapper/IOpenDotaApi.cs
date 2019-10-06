@@ -19,5 +19,7 @@ namespace OpenDotaDotNet
         IMmrDistributionEndpoint MmrDistribution { get; }
 
         ISearchEndpoint Search { get; }
+
+        IRankingEndpoint Ranking { get; }
     }
 }

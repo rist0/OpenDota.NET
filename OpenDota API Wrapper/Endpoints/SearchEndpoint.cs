@@ -36,6 +36,7 @@ namespace OpenDotaDotNet.Endpoints
             return players;
         }
 
+        #region Helper
         private List<string> CreateArgumentListForSearchPlayersRequest(string query = null)
         {
             var addedArguments = new List<string>();
@@ -47,5 +48,6 @@ namespace OpenDotaDotNet.Endpoints
 
             return addedArguments;
         }
+        #endregion
     }
 }
