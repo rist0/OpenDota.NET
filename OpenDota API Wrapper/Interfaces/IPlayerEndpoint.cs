@@ -100,5 +100,7 @@ namespace OpenDotaDotNet.Interfaces
                                                       List<int> excludedAccountIds = null, List<int> withHeroIds = null,
                                                       List<int> againstHeroIds = null, int? significant = null,
                                                       int? having = null, string sort = null);
+
+        Task<List<PlayerRating>> GetPlayerRatingsAsync(long playerId);
     }
 }
