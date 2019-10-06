@@ -102,5 +102,7 @@ namespace OpenDotaDotNet.Interfaces
                                                       int? having = null, string sort = null);
 
         Task<List<PlayerRating>> GetPlayerRatingsAsync(long playerId);
+
+        Task<List<PlayerHeroRanking>> GetPlayerHeroRankingsAsync(long playerId);
     }
 }

@@ -22,6 +22,7 @@ namespace OpenDotaDotNet.Endpoints
         private const string PlayerWardmap = "players/{0}/wardmap";
         private const string PlayerWordcloud = "players/{0}/wordcloud";
         private const string PlayerRatings = "players/{0}/ratings";
+        private const string PlayerHeroRankings = "players/{0}/rankings";
 
         private readonly Request _request;
 
@@ -456,6 +457,22 @@ namespace OpenDotaDotNet.Endpoints
             var playerRatings = JsonConvert.DeserializeObject<List<PlayerRating>>(await response.Content.ReadAsStringAsync());
 
             return playerRatings;
+        }
+
+        /// <summary>
+        /// Player hero rankings
+        /// </summary>
+        /// <param name="playerId">Steam32 account ID</param>
+        /// <returns></returns>
+        public async Task<List<PlayerHeroRanking>> GetPlayerHeroRankingsAsync(long playerId)
+        {
+            var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerHeroRankings, playerId));
+
+            response.EnsureSuccessStatusCode();
+
+            var playerHeroRankings = JsonConvert.DeserializeObject<List<PlayerHeroRanking>>(await response.Content.ReadAsStringAsync());
+
+            return playerHeroRankings;
         }
 
         #region Helper
