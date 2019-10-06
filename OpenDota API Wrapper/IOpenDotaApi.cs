@@ -17,5 +17,7 @@ namespace OpenDotaDotNet
         IMetadataEndpoint Metadata { get; }
 
         IMmrDistributionEndpoint MmrDistribution { get; }
+
+        ISearchEndpoint Search { get; }
     }
 }
