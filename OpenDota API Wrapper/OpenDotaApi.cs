@@ -17,6 +17,7 @@ namespace OpenDotaDotNet
         public IProMatchEndpoint ProMatches { get; }
         public IPublicMatchEndpoint PublicMatches { get; }
         public IMetadataEndpoint Metadata { get; }
+        public IMmrDistributionEndpoint MmrDistribution { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -38,6 +39,7 @@ namespace OpenDotaDotNet
             ProMatches = new ProMatchesEndpoint(_request);
             PublicMatches = new PublicMatchEndpoint(_request);
             Metadata = new MetadataEndpoint(_request);
+            MmrDistribution = new MmrDistributionEndpoint(_request);
         }
     }
 }

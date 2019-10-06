@@ -15,5 +15,7 @@ namespace OpenDotaDotNet
         IPublicMatchEndpoint PublicMatches { get; }
 
         IMetadataEndpoint Metadata { get; }
+
+        IMmrDistributionEndpoint MmrDistribution { get; }
     }
 }
