@@ -15,8 +15,9 @@ namespace OpenDotaDotNet
         public IPlayerEndpoint Player { get; }
         public IProPlayerEndpoint ProPlayers { get; }
         public IProMatchEndpoint ProMatches { get; }
+        public IPublicMatchEndpoint PublicMatches { get; }
 
-        public static OpenDotaApi GetInstance(string apiKey = "", WebProxy proxy = null)
+        public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
             if (_instance == null)
             {
@@ -34,6 +35,7 @@ namespace OpenDotaDotNet
             Player = new PlayerEndpoint(_request);
             ProPlayers = new ProPlayerEndpoint(_request);
             ProMatches = new ProMatchesEndpoint(_request);
+            PublicMatches = new PublicMatchEndpoint(_request);
         }
     }
 }

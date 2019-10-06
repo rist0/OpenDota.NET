@@ -64,6 +64,12 @@ namespace OpenDotaDotNet.Requests
             }
         }
 
+        public async Task<HttpResponseMessage> PostRequest(string url, List<string> queryParameters = null)
+        {
+            // TODO: This
+            return null;
+        }
+
         private string BuildArgumentsString(List<string> arguments)
         {
             if (ApiKey != null)

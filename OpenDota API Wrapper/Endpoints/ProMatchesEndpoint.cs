@@ -2,9 +2,7 @@
 using OpenDotaDotNet.Interfaces;
 using OpenDotaDotNet.Models.ProMatches;
 using OpenDotaDotNet.Requests;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenDotaDotNet.Endpoints
@@ -20,6 +18,11 @@ namespace OpenDotaDotNet.Endpoints
             _request = request;
         }
 
+        /// <summary>
+        /// Get list of pro matches
+        /// </summary>
+        /// <param name="lessThanMatchId"></param>
+        /// <returns></returns>
         public async Task<List<ProMatch>> GetProMatchesAsync(long? lessThanMatchId = null)
         {
             var addedArguments = CreateArgumentListForProMatchesRequest(lessThanMatchId);
