@@ -13,5 +13,7 @@ namespace OpenDotaDotNet
         IProMatchEndpoint ProMatches { get; }
 
         IPublicMatchEndpoint PublicMatches { get; }
+
+        IMetadataEndpoint Metadata { get; }
     }
 }
