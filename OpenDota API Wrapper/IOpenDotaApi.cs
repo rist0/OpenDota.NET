@@ -27,5 +27,7 @@ namespace OpenDotaDotNet
         IStatusEndpoint Status { get; }
 
         IHealthEndpoint Health { get; }
+
+        IRequestEndpoint Request { get; }
     }
 }
