@@ -45,5 +45,7 @@ namespace OpenDotaDotNet
         IRecordEndpoint Record { get; }
 
         ILiveEndpoint Live { get; }
+
+        IScenariosEndpoint Scenarios { get; }
     }
 }

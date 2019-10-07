@@ -32,6 +32,7 @@ namespace OpenDotaDotNet
         public IReplayEndpoint Replay { get; }
         public IRecordEndpoint Record { get; }
         public ILiveEndpoint Live { get; }
+        public IScenariosEndpoint Scenarios { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -68,6 +69,7 @@ namespace OpenDotaDotNet
             Replay = new ReplayEndpoint(_request);
             Record = new RecordEndpoint(_request);
             Live = new LiveEndpoint(_request);
+            Scenarios = new ScenariosEndpoint(_request);
         }
     }
 }
