@@ -145,11 +145,11 @@ namespace OpenDotaDotNet.Models.Matches
 
         // Radiant team information
         [JsonProperty("radiant_team")]
-        public Team RadiantTeam { get; set; }
+        public MatchTeam RadiantTeam { get; set; }
 
         // Dire team information
         [JsonProperty("dire_team")]
-        public Team DireTeam { get; set; }
+        public MatchTeam DireTeam { get; set; }
 
         // Array of information on individual players
         [JsonProperty("players")]

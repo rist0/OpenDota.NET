@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OpenDotaDotNet.Models.Matches
 {
-    public class Benchmarks
+    public class MatchPlayerBenchmarks
     {
         [JsonProperty("gold_per_min")]
         public Dictionary<string, double> GoldPerMin { get; set; }

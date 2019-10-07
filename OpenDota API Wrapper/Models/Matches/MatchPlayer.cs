@@ -521,7 +521,7 @@ namespace OpenDotaDotNet.Models.Matches
 
         // Object containing information on certain benchmarks like GPM, XPM, KDA, tower damage, etc
         [JsonProperty("benchmarks")]
-        public Benchmarks Benchmarks { get; set; }
+        public MatchPlayerBenchmarks Benchmarks { get; set; }
 
         // Total amount of observer wards purchased by the player
         [JsonProperty("purchase_ward_observer", NullValueHandling = NullValueHandling.Ignore)]
