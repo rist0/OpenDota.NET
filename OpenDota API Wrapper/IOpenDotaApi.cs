@@ -39,5 +39,9 @@ namespace OpenDotaDotNet
         ILeagueEndpoint League { get; }
 
         ITeamEndpoint Team { get; }
+        
+        IReplayEndpoint Replay { get; }
+
+        IRecordEndpoint Record { get; }
     }
 }

@@ -29,6 +29,8 @@ namespace OpenDotaDotNet
         public IHeroStatsEndpoint HeroStats { get; }
         public ILeagueEndpoint League { get; }
         public ITeamEndpoint Team { get; }
+        public IReplayEndpoint Replay { get; }
+        public IRecordEndpoint Record { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -62,6 +64,8 @@ namespace OpenDotaDotNet
             HeroStats = new HeroStatsEndpoint(_request);
             League = new LeagueEndpoint(_request);
             Team = new TeamEndpoint(_request);
+            Replay = new ReplayEndpoint(_request);
+            Record = new RecordEndpoint(_request);
         }
     }
 }
