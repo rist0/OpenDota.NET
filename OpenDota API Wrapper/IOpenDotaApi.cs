@@ -47,5 +47,7 @@ namespace OpenDotaDotNet
         ILiveEndpoint Live { get; }
 
         IScenariosEndpoint Scenarios { get; }
+
+        ISchemaEndpoint Schema { get; }
     }
 }

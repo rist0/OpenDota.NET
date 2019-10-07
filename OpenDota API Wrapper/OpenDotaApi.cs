@@ -33,6 +33,7 @@ namespace OpenDotaDotNet
         public IRecordEndpoint Record { get; }
         public ILiveEndpoint Live { get; }
         public IScenariosEndpoint Scenarios { get; }
+        public ISchemaEndpoint Schema { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -70,6 +71,7 @@ namespace OpenDotaDotNet
             Record = new RecordEndpoint(_request);
             Live = new LiveEndpoint(_request);
             Scenarios = new ScenariosEndpoint(_request);
+            Schema = new SchemaEndpoint(_request);
         }
     }
 }
