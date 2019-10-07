@@ -29,5 +29,7 @@ namespace OpenDotaDotNet
         IHealthEndpoint Health { get; }
 
         IRequestEndpoint Request { get; }
+
+        IFindMatchEndpoint FindMatch { get; }
     }
 }

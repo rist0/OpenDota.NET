@@ -36,17 +36,23 @@ namespace OpenDotaDotNet.Requests
         {
             try
             {
+                string fullUrl = url;
+
                 if (queryParameters == null)
                 {
                     if (ApiKey != null)
                     {
                         queryParameters = new List<string>();
+
+                        fullUrl = $@"{url}?{BuildArgumentsString(queryParameters)}";
                     }
                 }
+                else
+                {
+                    fullUrl = $@"{url}?{BuildArgumentsString(queryParameters)}";
+                }
 
-                var urlWithQueryParameters = queryParameters == null ? url : $@"{url}?{BuildArgumentsString(queryParameters)}";
-
-                var message = await _httpClient.GetAsync(urlWithQueryParameters);
+                var message = await _httpClient.GetAsync(fullUrl);
 
                 return message;
             }
