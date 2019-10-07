@@ -35,5 +35,7 @@ namespace OpenDotaDotNet
         IHeroEndpoint Hero { get; }
 
         IHeroStatsEndpoint HeroStats { get; }
+
+        ILeagueEndpoint League { get; }
     }
 }
