@@ -21,5 +21,7 @@ namespace OpenDotaDotNet
         ISearchEndpoint Search { get; }
 
         IRankingEndpoint Ranking { get; }
+
+        IBenchmarkEndpoint Benchmarks { get; }
     }
 }

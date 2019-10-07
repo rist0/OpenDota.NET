@@ -20,6 +20,7 @@ namespace OpenDotaDotNet
         public IMmrDistributionEndpoint MmrDistribution { get; }
         public ISearchEndpoint Search { get; }
         public IRankingEndpoint Ranking { get; }
+        public IBenchmarkEndpoint Benchmarks { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -44,6 +45,7 @@ namespace OpenDotaDotNet
             MmrDistribution = new MmrDistributionEndpoint(_request);
             Search = new SearchEndpoint(_request);
             Ranking = new RankingEndpoint(_request);
+            Benchmarks = new BenchmarksEndpoint(_request);
         }
     }
 }
