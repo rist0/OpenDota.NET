@@ -43,5 +43,7 @@ namespace OpenDotaDotNet
         IReplayEndpoint Replay { get; }
 
         IRecordEndpoint Record { get; }
+
+        ILiveEndpoint Live { get; }
     }
 }
