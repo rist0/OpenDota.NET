@@ -25,5 +25,7 @@ namespace OpenDotaDotNet
         IBenchmarkEndpoint Benchmarks { get; }
 
         IStatusEndpoint Status { get; }
+
+        IHealthEndpoint Health { get; }
     }
 }

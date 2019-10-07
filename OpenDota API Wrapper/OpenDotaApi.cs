@@ -22,6 +22,7 @@ namespace OpenDotaDotNet
         public IRankingEndpoint Ranking { get; }
         public IBenchmarkEndpoint Benchmarks { get; }
         public IStatusEndpoint Status { get; }
+        public IHealthEndpoint Health { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -48,6 +49,7 @@ namespace OpenDotaDotNet
             Ranking = new RankingEndpoint(_request);
             Benchmarks = new BenchmarksEndpoint(_request);
             Status = new StatusEndpoint(_request);
+            Health = new HealthEndpoint(_request);
         }
     }
 }
