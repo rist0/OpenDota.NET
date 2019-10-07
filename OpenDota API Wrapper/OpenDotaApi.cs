@@ -26,6 +26,7 @@ namespace OpenDotaDotNet
         public IRequestEndpoint Request { get; }
         public IFindMatchEndpoint FindMatch { get; }
         public IHeroEndpoint Hero { get; }
+        public IHeroStatsEndpoint HeroStats { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -56,6 +57,7 @@ namespace OpenDotaDotNet
             Request = new RequestEndpoint(_request);
             FindMatch = new FindMatchEndpoint(_request);
             Hero = new HeroEndpoint(_request);
+            HeroStats = new HeroStatsEndpoint(_request);
         }
     }
 }

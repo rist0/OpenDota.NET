@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OpenDotaDotNet.Enums;
 using System.Collections.Generic;
 
 namespace OpenDotaDotNet.Models.Heroes
@@ -27,19 +28,19 @@ namespace OpenDotaDotNet.Models.Heroes
         /// Hero primary shorthand attribute name, e.g. 'agi'
         /// </summary>
         [JsonProperty("primary_attr")]
-        public PrimaryAttribute PrimaryAttribute { get; set; }
+        public HeroPrimaryAttribute PrimaryAttribute { get; set; }
 
         /// <summary>
         /// Hero attack type, either 'Melee' or 'Ranged'
         /// </summary>
         [JsonProperty("attack_type")]
-        public AttackType AttackType { get; set; }
+        public HeroAttackType AttackType { get; set; }
 
         /// <summary>
         /// A hero's role in the game
         /// </summary>
         [JsonProperty("roles")]
-        public List<Role> Roles { get; set; }
+        public List<HeroRole> Roles { get; set; }
 
         /// <summary>
         /// A hero's amount of legs
@@ -47,10 +48,4 @@ namespace OpenDotaDotNet.Models.Heroes
         [JsonProperty("legs")]
         public int Legs { get; set; }
     }
-
-    public enum AttackType { Melee, Ranged };
-
-    public enum PrimaryAttribute { Agi, Int, Str };
-
-    public enum Role { Carry, Disabler, Durable, Escape, Initiator, Jungler, Nuker, Pusher, Support };
 }
