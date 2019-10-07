@@ -23,6 +23,7 @@ namespace OpenDotaDotNet.Endpoints
         private const string PlayerWordcloud = "players/{0}/wordcloud";
         private const string PlayerRatings = "players/{0}/ratings";
         private const string PlayerHeroRankings = "players/{0}/rankings";
+        private const string RefreshPlayerMatchHistory = "players/{0}/refresh";
 
         private readonly Request _request;
 
@@ -473,6 +474,20 @@ namespace OpenDotaDotNet.Endpoints
             var playerHeroRankings = JsonConvert.DeserializeObject<List<PlayerHeroRanking>>(await response.Content.ReadAsStringAsync());
 
             return playerHeroRankings;
+        }
+
+        /// <summary>
+        /// Refresh player match history
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
+        public async Task<bool> RefreshPlayerMatchHistoryAsync(long playerId)
+        {
+            var response = await _request.PostRequest(string.Format(RefreshPlayerMatchHistory, playerId));
+
+            response.EnsureSuccessStatusCode();
+
+            return true;
         }
 
         #region Helper

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenDotaDotNet.Requests
@@ -30,8 +29,6 @@ namespace OpenDotaDotNet.Requests
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
-            _httpClient.DefaultRequestHeaders.Add("User-Agent",
-                                                  "Mozilla/5.0 (Windows NT 6.4; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2225.0 Safari/537.36");
             _httpClient.BaseAddress = new Uri("https://api.opendota.com/api/");
         }
 
@@ -64,10 +61,13 @@ namespace OpenDotaDotNet.Requests
             }
         }
 
-        public async Task<HttpResponseMessage> PostRequest(string url, List<string> queryParameters = null)
+        public async Task<HttpResponseMessage> PostRequest(string url, HttpContent content = null)
         {
-            // TODO: This
-            return null;
+            content = new StringContent("");
+
+            var response = await _httpClient.PostAsync(url, content);
+
+            return response;
         }
 
         private string BuildArgumentsString(List<string> arguments)

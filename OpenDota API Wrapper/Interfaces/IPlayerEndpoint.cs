@@ -104,5 +104,7 @@ namespace OpenDotaDotNet.Interfaces
         Task<List<PlayerRating>> GetPlayerRatingsAsync(long playerId);
 
         Task<List<PlayerHeroRanking>> GetPlayerHeroRankingsAsync(long playerId);
+
+        Task<bool> RefreshPlayerMatchHistoryAsync(long playerId);
     }
 }
