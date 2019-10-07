@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OpenDotaDotNet.Interfaces;
-using OpenDotaDotNet.Models.Status;
+using OpenDotaDotNet.Models.HealthStatus;
 using OpenDotaDotNet.Requests;
 using System;
 using System.Collections.Generic;

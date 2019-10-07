@@ -1,4 +1,4 @@
-﻿using OpenDotaDotNet.Models.Status;
+﻿using OpenDotaDotNet.Models.HealthStatus;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OpenDotaDotNet.Models.Status
+namespace OpenDotaDotNet.Models.HealthStatus
 {
     public class ServiceHealth
     {
