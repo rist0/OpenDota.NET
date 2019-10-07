@@ -21,6 +21,7 @@ namespace OpenDotaDotNet
         public ISearchEndpoint Search { get; }
         public IRankingEndpoint Ranking { get; }
         public IBenchmarkEndpoint Benchmarks { get; }
+        public IStatusEndpoint Status { get; }
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
@@ -46,6 +47,7 @@ namespace OpenDotaDotNet
             Search = new SearchEndpoint(_request);
             Ranking = new RankingEndpoint(_request);
             Benchmarks = new BenchmarksEndpoint(_request);
+            Status = new StatusEndpoint(_request);
         }
     }
 }

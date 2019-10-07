@@ -23,5 +23,7 @@ namespace OpenDotaDotNet
         IRankingEndpoint Ranking { get; }
 
         IBenchmarkEndpoint Benchmarks { get; }
+
+        IStatusEndpoint Status { get; }
     }
 }
