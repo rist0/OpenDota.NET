@@ -31,5 +31,7 @@ namespace OpenDotaDotNet
         IRequestEndpoint Request { get; }
 
         IFindMatchEndpoint FindMatch { get; }
+
+        IHeroEndpoint Hero { get; }
     }
 }
