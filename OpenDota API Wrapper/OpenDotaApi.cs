@@ -37,12 +37,7 @@ namespace OpenDotaDotNet
 
         public static OpenDotaApi GetInstance(string apiKey = null, WebProxy proxy = null)
         {
-            if (_instance == null)
-            {
-                _instance = new OpenDotaApi(apiKey, proxy);
-            }
-
-            return _instance;
+            return _instance ?? (_instance = new OpenDotaApi(apiKey, proxy));
         }
 
         private OpenDotaApi(string apiKey, WebProxy proxy)

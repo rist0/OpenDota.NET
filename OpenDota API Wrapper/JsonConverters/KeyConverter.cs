@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using OpenDotaDotNet.Models.Matches;
 
 namespace OpenDotaDotNet.JsonConverters

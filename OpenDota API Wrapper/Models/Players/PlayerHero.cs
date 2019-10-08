@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using OpenDotaDotNet.JsonConverters;
 
 namespace OpenDotaDotNet.Models.Players
 {

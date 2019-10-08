@@ -2,9 +2,6 @@
 using OpenDotaDotNet.Interfaces;
 using OpenDotaDotNet.Models.HealthStatus;
 using OpenDotaDotNet.Requests;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenDotaDotNet.Endpoints

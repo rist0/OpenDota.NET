@@ -1,7 +1,5 @@
 ﻿using OpenDotaDotNet.Models.ProMatches;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenDotaDotNet.Interfaces

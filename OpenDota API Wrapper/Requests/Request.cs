@@ -26,17 +26,16 @@ namespace OpenDotaDotNet.Requests
 
             _httpClient = new HttpClient(_httpClientHandler)
             {
-                Timeout = TimeSpan.FromSeconds(30)
+                Timeout = TimeSpan.FromSeconds(30), 
+                BaseAddress = new Uri("https://api.opendota.com/api/")
             };
-
-            _httpClient.BaseAddress = new Uri("https://api.opendota.com/api/");
         }
 
         public async Task<HttpResponseMessage> GetRequestResponseMessageAsync(string url, List<string> queryParameters = null)
         {
             try
             {
-                string fullUrl = url;
+                var fullUrl = url;
 
                 if (queryParameters == null)
                 {
