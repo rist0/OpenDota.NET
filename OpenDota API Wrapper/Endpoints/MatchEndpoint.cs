@@ -23,7 +23,7 @@ namespace OpenDotaDotNet.Endpoints
 
             response.EnsureSuccessStatusCode();
 
-            var matchInfo = JsonConvert.DeserializeObject<Match>(await response.Content.ReadAsStringAsync()/*, JsonConverters.KeyConverter.Singleton*/);
+            var matchInfo = JsonConvert.DeserializeObject<Match>(await response.Content.ReadAsStringAsync());
 
             return matchInfo;
         }

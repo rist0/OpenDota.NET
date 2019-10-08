@@ -4,6 +4,7 @@ using OpenDotaDotNet.Models.Players;
 using OpenDotaDotNet.Requests;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OpenDotaDotNet.DTOs;
 
 namespace OpenDotaDotNet.Endpoints
 {
@@ -52,39 +53,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Win/Loss count
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query parameters</param>
         /// <returns></returns>
-        public async Task<PlayerWinLoss> GetPlayerWinLossByIdAsync(long playerId, int? limit = null, int? offset = null,
-                                                                   int? win = null, int? patch = null,
-                                                                   int? gameMode = null, int? lobbyType = null,
-                                                                   int? region = null, int? date = null,
-                                                                   int? laneRole = null, int? heroId = null,
-                                                                   int? isRadiant = null,
-                                                                   List<int> includedAccountIds = null,
-                                                                   List<int> excludedAccountIds = null,
-                                                                   List<int> withHeroIds = null,
-                                                                   List<int> againstHeroIds = null,
-                                                                   int? significant = null, int? having = null,
-                                                                   string sort = null)
+        public async Task<PlayerWinLoss> GetPlayerWinLossByIdAsync(long playerId, PlayerEndpointParameters parameters = null)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerWinLossByIdUrl, playerId), addedArguments);
 
@@ -115,38 +88,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Matches played
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
-        /// <param name="project">Fields to project (array)</param>
+        /// <param name="parameters">Query parameters</param>
         /// <returns></returns>
-        public async Task<List<PlayerMatch>> GetPlayerMatchesAsync(long playerId, int? limit = null, int? offset = null,
-                                                             int? win = null, int? patch = null, int? gameMode = null,
-                                                             int? lobbyType = null, int? region = null, int? date = null,
-                                                             int? laneRole = null, int? heroId = null,
-                                                             int? isRadiant = null, List<int> includedAccountIds = null,
-                                                             List<int> excludedAccountIds = null,
-                                                             List<int> withHeroIds = null,
-                                                             List<int> againstHeroIds = null, int? significant = null,
-                                                             int? having = null, string sort = null,
-                                                             string project = null)
+        public async Task<List<PlayerMatch>> GetPlayerMatchesAsync(long playerId, PlayerEndpointParameters parameters = null)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort, project);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerMatches, playerId), addedArguments);
             response.EnsureSuccessStatusCode();
             // test
@@ -159,28 +105,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Heroes played
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<List<PlayerHero>> GetPlayerHeroesAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<List<PlayerHero>> GetPlayerHeroesAsync(long playerId, PlayerEndpointParameters parameters = null)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerHeroes, playerId), addedArguments);
 
@@ -195,28 +124,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Players played with
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<List<PlayerPeer>> GetPlayerPeersAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<List<PlayerPeer>> GetPlayerPeersAsync(long playerId, PlayerEndpointParameters parameters)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerPeers, playerId), addedArguments);
 
@@ -231,28 +143,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Pro players played with
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<List<PlayerPro>> GetPlayerProsAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<List<PlayerPro>> GetPlayerProsAsync(long playerId, PlayerEndpointParameters parameters)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerPros, playerId), addedArguments);
 
@@ -267,28 +162,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Totals in stats
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<List<PlayerTotal>> GetPlayerTotalsAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<List<PlayerTotal>> GetPlayerTotalsAsync(long playerId, PlayerEndpointParameters parameters)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerTotals, playerId), addedArguments);
 
@@ -303,28 +181,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Counts in categories
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<PlayerCount> GetPlayerCountsAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<PlayerCount> GetPlayerCountsAsync(long playerId, PlayerEndpointParameters parameters)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerCounts, playerId), addedArguments);
 
@@ -339,29 +200,12 @@ namespace OpenDotaDotNet.Endpoints
         /// Distribution of matches in a single stat
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="field">Field to aggregate on (Available fields: kills, actions_per_min, assists, comeback, courier_kills, deaths, denies, duration, lane_efficiency_pct, purchase_gem, gold_per_min, hero_damage, hero_healing, kda, last_hits, level, loss, pings, neutral_kills, purchase_ward_observer, purchase_rapier, purchase_ward_sentry, stomp, stuns, throw, tower_damage, tower_kills, purchase_tpscroll, xp_per_min and others</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="field">Field to aggregate on</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<List<PlayerHistogram>> GetPlayerHistogramsAsync(long playerId, string field, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<List<PlayerHistogram>> GetPlayerHistogramsAsync(long playerId, string field, PlayerEndpointParameters parameters)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerHistograms, playerId, field), addedArguments);
 
@@ -376,28 +220,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Wards placed in matches played
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<PlayerWardmap> GetPlayerWardmapAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<PlayerWardmap> GetPlayerWardmapAsync(long playerId, PlayerEndpointParameters parameters)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerWardmap, playerId), addedArguments);
 
@@ -412,28 +239,11 @@ namespace OpenDotaDotNet.Endpoints
         /// Words said/read in matches played
         /// </summary>
         /// <param name="playerId">Steam32 account ID</param>
-        /// <param name="limit">Number of matches to limit to</param>
-        /// <param name="offset">Number of matches to offset start by</param>
-        /// <param name="win">Whether the player won</param>
-        /// <param name="patch">Patch ID</param>
-        /// <param name="gameMode">Game Mode ID</param>
-        /// <param name="lobbyType">Lobby type ID</param>
-        /// <param name="region">Region ID</param>
-        /// <param name="date">Days previous</param>
-        /// <param name="laneRole">Lane Role ID</param>
-        /// <param name="heroId">Hero ID</param>
-        /// <param name="isRadiant">Whether the player was radiant</param>
-        /// <param name="includedAccountIds">Account IDs in the match (array)</param>
-        /// <param name="excludedAccountIds">Account IDs not in the match (array)</param>
-        /// <param name="withHeroIds">Hero IDs on the player's team (array)</param>
-        /// <param name="againstHeroIds">Hero IDs against the player's team (array)</param>
-        /// <param name="significant">Whether the match was significant for aggregation purposes. Defaults to 1 (true), set this to 0 to return data for non-standard modes/matches.</param>
-        /// <param name="having">The minimum number of games played, for filtering hero stats</param>
-        /// <param name="sort">The field to return matches sorted by in descending order</param>
+        /// <param name="parameters">Query Parameters</param>
         /// <returns></returns>
-        public async Task<PlayerWordcloud> GetPlayerWordcloudAsync(long playerId, int? limit = null, int? offset = null, int? win = null, int? patch = null, int? gameMode = null, int? lobbyType = null, int? region = null, int? date = null, int? laneRole = null, int? heroId = null, int? isRadiant = null, List<int> includedAccountIds = null, List<int> excludedAccountIds = null, List<int> withHeroIds = null, List<int> againstHeroIds = null, int? significant = null, int? having = null, string sort = null)
+        public async Task<PlayerWordcloud> GetPlayerWordcloudAsync(long playerId, PlayerEndpointParameters parameters)
         {
-            var addedArguments = CreateArgumentListForPlayerWinLossRequest(limit, offset, win, patch, gameMode, lobbyType, region, date, laneRole, heroId, isRadiant, includedAccountIds, excludedAccountIds, withHeroIds, againstHeroIds, significant, having, sort);
+            var addedArguments = CreateArgumentListForPlayerEndpointRequest(parameters);
 
             var response = await _request.GetRequestResponseMessageAsync(string.Format(PlayerWordcloud, playerId), addedArguments);
 
@@ -491,134 +301,118 @@ namespace OpenDotaDotNet.Endpoints
         }
 
         #region Helper
-        private List<string> CreateArgumentListForPlayerWinLossRequest(
-            int? limit = null,
-            int? offset = null, 
-            int? win = null, 
-            int? patch = null, 
-            int? gameMode = null, 
-            int? lobbyType = null, 
-            int? region = null, 
-            int? date = null, 
-            int? laneRole = null, 
-            int? heroId = null, 
-            int? isRadiant = null, 
-            List<int> includedAccountIds = null, 
-            List<int> excludedAccountIds = null,
-            List<int> withHeroIds = null, 
-            List<int> againstHeroIds = null, 
-            int? significant = null, 
-            int? having = null, 
-            string sort = null,
-            string project = null)
+        private List<string> CreateArgumentListForPlayerEndpointRequest(PlayerEndpointParameters parameters)
         {
             var addedArguments = new List<string>();
 
-            if (limit != null)
+            if (parameters.Limit != null)
             {
-                addedArguments.Add($@"limit={limit}");
+                addedArguments.Add($@"limit={parameters.Limit}");
             }
 
-            if (offset != null)
+            if (parameters.Offset != null)
             {
-                addedArguments.Add($@"offset={offset}");
+                addedArguments.Add($@"offset={parameters.Offset}");
             }
 
-            if (win != null)
+            if (parameters.Win != null)
             {
-                addedArguments.Add($@"win={win}");
+                addedArguments.Add($@"win={parameters.Win}");
             }
 
-            if (patch != null)
+            if (parameters.Patch != null)
             {
-                addedArguments.Add($@"patch={patch}");
+                addedArguments.Add($@"patch={parameters.Patch}");
             }
 
-            if (gameMode != null)
+            if (parameters.GameMode != null)
             {
-                addedArguments.Add($@"game_mode={gameMode}");
+                addedArguments.Add($@"game_mode={parameters.GameMode}");
             }
 
-            if (lobbyType != null)
+            if (parameters.LobbyType != null)
             {
-                addedArguments.Add($@"lobby_type={lobbyType}");
+                addedArguments.Add($@"lobby_type={parameters.LobbyType}");
             }
 
-            if (region != null)
+            if (parameters.Region != null)
             {
-                addedArguments.Add($@"region={region}");
+                addedArguments.Add($@"region={parameters.Region}");
             }
 
-            if (date != null)
+            if (parameters.Date != null)
             {
-                addedArguments.Add($@"date={date}");
+                addedArguments.Add($@"date={parameters.Date}");
             }
 
-            if (laneRole != null)
+            if (parameters.LaneRole != null)
             {
-                addedArguments.Add($@"lane_role={laneRole}");
+                addedArguments.Add($@"lane_role={parameters.LaneRole}");
             }
 
-            if (heroId != null)
+            if (parameters.HeroId != null)
             {
-                addedArguments.Add($@"hero_id={heroId}");
+                addedArguments.Add($@"hero_id={parameters.HeroId}");
             }
 
-            if (isRadiant != null)
+            if (parameters.IsRadiant != null)
             {
-                addedArguments.Add($@"is_radiant={isRadiant}");
+                addedArguments.Add($@"is_radiant={parameters.IsRadiant}");
             }
 
-            if (includedAccountIds != null)
+            if (parameters.IncludedAccountIds != null)
             {
-                foreach(var includedAccountId in includedAccountIds)
+                foreach (var includedAccountId in parameters.IncludedAccountIds)
                 {
                     addedArguments.Add($@"included_account_id={includedAccountId}");
                 }
             }
 
-            if (excludedAccountIds != null)
+            if (parameters.ExcludedAccountIds != null)
             {
-                foreach (var excludedAccountId in excludedAccountIds)
+                foreach (var excludedAccountId in parameters.ExcludedAccountIds)
                 {
                     addedArguments.Add($@"excluded_account_id={excludedAccountId}");
                 }
             }
 
-            if (withHeroIds != null)
+            if (parameters.WithHeroIds != null)
             {
-                foreach (var withHeroId in withHeroIds)
+                foreach (var withHeroId in parameters.WithHeroIds)
                 {
                     addedArguments.Add($@"with_hero_id={withHeroId}");
                 }
             }
 
-            if (againstHeroIds != null)
+            if (parameters.AgainstHeroIds != null)
             {
-                foreach (var againstHeroId in againstHeroIds)
+                foreach (var againstHeroId in parameters.AgainstHeroIds)
                 {
                     addedArguments.Add($@"against_hero_id={againstHeroId}");
                 }
             }
 
-            if (significant != null)
+            if (parameters.Significant != null)
             {
-                addedArguments.Add($@"significant={significant}");
+                addedArguments.Add($@"significant={parameters.Significant}");
             }
 
-            if (having != null)
+            if (parameters.Having != null)
             {
-                addedArguments.Add($@"having={having}");
+                addedArguments.Add($@"having={parameters.Having}");
             }
 
-            if (sort != null)
+            if (parameters.Sort != null)
             {
-                addedArguments.Add($@"sort={sort}");
+                addedArguments.Add($@"sort={parameters.Sort}");
             }
 
-            if (project != null)
+            if (parameters.Project != null)
             {
-                addedArguments.Add($@"project={project}");
+                foreach (var project in parameters.Project)
+                {
+                    addedArguments.Add($@"project={project}");
+                }
             }
 
             return addedArguments;

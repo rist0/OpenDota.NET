@@ -1,6 +1,7 @@
 ﻿using OpenDotaDotNet.Models.Players;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using OpenDotaDotNet.DTOs;
 
 namespace OpenDotaDotNet.Interfaces
 {
@@ -8,98 +9,27 @@ namespace OpenDotaDotNet.Interfaces
     {
         Task<Player> GetPlayerByIdAsync(long playerId);
 
-        Task<PlayerWinLoss> GetPlayerWinLossByIdAsync(long playerId, int? limit = null, int? offset = null,
-                                                      int? win = null, int? patch = null, int? gameMode = null,
-                                                      int? lobbyType = null, int? region = null, int? date = null,
-                                                      int? laneRole = null, int? heroId = null, int? isRadiant = null,
-                                                      List<int> includedAccountIds = null,
-                                                      List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                      List<int> againstHeroIds = null, int? significant = null,
-                                                      int? having = null, string sort = null);
+        Task<PlayerWinLoss> GetPlayerWinLossByIdAsync(long playerId, PlayerEndpointParameters parameters = null);
 
         Task<List<PlayerRecentMatch>> GetPlayerRecentMatchesAsync(long playerId);
 
-        Task<List<PlayerMatch>> GetPlayerMatchesAsync(long playerId, int? limit = null, int? offset = null,
-                                                      int? win = null, int? patch = null, int? gameMode = null,
-                                                      int? lobbyType = null, int? region = null, int? date = null,
-                                                      int? laneRole = null, int? heroId = null, int? isRadiant = null,
-                                                      List<int> includedAccountIds = null,
-                                                      List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                      List<int> againstHeroIds = null, int? significant = null,
-                                                      int? having = null, string sort = null, string project = null);
+        Task<List<PlayerMatch>> GetPlayerMatchesAsync(long playerId, PlayerEndpointParameters parameters = null);
 
-        Task<List<PlayerHero>> GetPlayerHeroesAsync(long playerId, int? limit = null, int? offset = null,
-                                                    int? win = null, int? patch = null, int? gameMode = null,
-                                                    int? lobbyType = null, int? region = null, int? date = null,
-                                                    int? laneRole = null, int? heroId = null, int? isRadiant = null,
-                                                    List<int> includedAccountIds = null,
-                                                    List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                    List<int> againstHeroIds = null, int? significant = null,
-                                                    int? having = null, string sort = null);
+        Task<List<PlayerHero>> GetPlayerHeroesAsync(long playerId, PlayerEndpointParameters parameters = null);
 
-        Task<List<PlayerPeer>> GetPlayerPeersAsync(long playerId, int? limit = null, int? offset = null, int? win = null,
-                                                   int? patch = null, int? gameMode = null, int? lobbyType = null,
-                                                   int? region = null, int? date = null, int? laneRole = null,
-                                                   int? heroId = null, int? isRadiant = null,
-                                                   List<int> includedAccountIds = null,
-                                                   List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                   List<int> againstHeroIds = null, int? significant = null,
-                                                   int? having = null, string sort = null);
+        Task<List<PlayerPeer>> GetPlayerPeersAsync(long playerId, PlayerEndpointParameters parameters = null);
 
-        Task<List<PlayerPro>> GetPlayerProsAsync(long playerId, int? limit = null, int? offset = null, int? win = null,
-                                                 int? patch = null, int? gameMode = null, int? lobbyType = null,
-                                                 int? region = null, int? date = null, int? laneRole = null,
-                                                 int? heroId = null, int? isRadiant = null,
-                                                 List<int> includedAccountIds = null,
-                                                 List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                 List<int> againstHeroIds = null, int? significant = null,
-                                                 int? having = null, string sort = null);
+        Task<List<PlayerPro>> GetPlayerProsAsync(long playerId, PlayerEndpointParameters parameters = null);
 
-        Task<List<PlayerTotal>> GetPlayerTotalsAsync(long playerId, int? limit = null, int? offset = null,
-                                                     int? win = null, int? patch = null, int? gameMode = null,
-                                                     int? lobbyType = null, int? region = null, int? date = null,
-                                                     int? laneRole = null, int? heroId = null, int? isRadiant = null,
-                                                     List<int> includedAccountIds = null,
-                                                     List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                     List<int> againstHeroIds = null, int? significant = null,
-                                                     int? having = null, string sort = null);
+        Task<List<PlayerTotal>> GetPlayerTotalsAsync(long playerId, PlayerEndpointParameters parameters = null);
 
-        Task<PlayerCount> GetPlayerCountsAsync(long playerId, int? limit = null, int? offset = null, int? win = null,
-                                               int? patch = null, int? gameMode = null, int? lobbyType = null,
-                                               int? region = null, int? date = null, int? laneRole = null,
-                                               int? heroId = null, int? isRadiant = null,
-                                               List<int> includedAccountIds = null, List<int> excludedAccountIds = null,
-                                               List<int> withHeroIds = null, List<int> againstHeroIds = null,
-                                               int? significant = null, int? having = null, string sort = null);
+        Task<PlayerCount> GetPlayerCountsAsync(long playerId, PlayerEndpointParameters parameters = null);
 
-        Task<List<PlayerHistogram>> GetPlayerHistogramsAsync(long playerId, string field, int? limit = null,
-                                                             int? offset = null, int? win = null, int? patch = null,
-                                                             int? gameMode = null, int? lobbyType = null,
-                                                             int? region = null, int? date = null, int? laneRole = null,
-                                                             int? heroId = null, int? isRadiant = null,
-                                                             List<int> includedAccountIds = null,
-                                                             List<int> excludedAccountIds = null,
-                                                             List<int> withHeroIds = null,
-                                                             List<int> againstHeroIds = null, int? significant = null,
-                                                             int? having = null, string sort = null);
+        Task<List<PlayerHistogram>> GetPlayerHistogramsAsync(long playerId, string field, PlayerEndpointParameters parameters = null);
 
-        Task<PlayerWardmap> GetPlayerWardmapAsync(long playerId, int? limit = null, int? offset = null, int? win = null,
-                                                  int? patch = null, int? gameMode = null, int? lobbyType = null,
-                                                  int? region = null, int? date = null, int? laneRole = null,
-                                                  int? heroId = null, int? isRadiant = null,
-                                                  List<int> includedAccountIds = null,
-                                                  List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                  List<int> againstHeroIds = null, int? significant = null,
-                                                  int? having = null, string sort = null);
+        Task<PlayerWardmap> GetPlayerWardmapAsync(long playerId, PlayerEndpointParameters parameters = null);
 
-        Task<PlayerWordcloud> GetPlayerWordcloudAsync(long playerId, int? limit = null, int? offset = null,
-                                                      int? win = null, int? patch = null, int? gameMode = null,
-                                                      int? lobbyType = null, int? region = null, int? date = null,
-                                                      int? laneRole = null, int? heroId = null, int? isRadiant = null,
-                                                      List<int> includedAccountIds = null,
-                                                      List<int> excludedAccountIds = null, List<int> withHeroIds = null,
-                                                      List<int> againstHeroIds = null, int? significant = null,
-                                                      int? having = null, string sort = null);
+        Task<PlayerWordcloud> GetPlayerWordcloudAsync(long playerId, PlayerEndpointParameters parameters = null);
 
         Task<List<PlayerRating>> GetPlayerRatingsAsync(long playerId);
 
