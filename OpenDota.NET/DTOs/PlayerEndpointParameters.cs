@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OpenDotaDotNet.DTOs
+namespace OpenDotaDotNet.Dtos
 {
     public class PlayerEndpointParameters
     {

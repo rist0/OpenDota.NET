@@ -4,7 +4,7 @@ using OpenDotaDotNet.Models.Players;
 using OpenDotaDotNet.Requests;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OpenDotaDotNet.DTOs;
+using OpenDotaDotNet.Dtos;
 
 namespace OpenDotaDotNet.Endpoints
 {
