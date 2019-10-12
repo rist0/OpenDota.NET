@@ -305,6 +305,8 @@ namespace OpenDotaDotNet.Endpoints
         {
             var addedArguments = new List<string>();
 
+            if (parameters == null) return addedArguments;
+
             if (parameters.Limit != null)
             {
                 addedArguments.Add($@"limit={parameters.Limit}");
